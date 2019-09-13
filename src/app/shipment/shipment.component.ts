@@ -16,7 +16,7 @@ export class ShipmentComponent implements OnInit {
     const id = +this.route.snapshot.params['id'];
 
     this.shipmentService.getShimpent(id).subscribe((response: Response) => {
-      let data = response.json();
+      let data = response;
       console.log(data);
     }, error => {
       console.log(error);

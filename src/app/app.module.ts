@@ -8,18 +8,23 @@ import { ShipmentComponent } from './shipment/shipment.component';
 import { ShipmentService } from './shipment.service';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from './header/header.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     ShipmentComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AlertModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    AngularFontAwesomeModule,
   ],
   providers: [ShipmentService],
   bootstrap: [AppComponent]

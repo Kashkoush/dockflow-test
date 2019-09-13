@@ -1,1 +1,82 @@
-<button class="btn btn-primary" [routerLink]="['/shipment', 7580]" >Go to Shipment</button>
+<div class="container mt-5">
+  <!-- start dashboard -->
+  <div class="row">
+    <alert class="w-100">
+      <strong>Dashboard</strong>
+    </alert>
+  </div>
+  <!-- End Dashboard -->
+
+
+  <!-- start Tradeflow overview -->
+  <div class="card bg-light mb-3">
+    <div class="card-header">
+      <b>Tradeflow Overview</b>
+    </div>
+    <!-- start shipments -->
+    <div class="card-body" style="background-color: white">
+      <!-- Begin Loader -->
+      <div class="card-header" *ngIf="loading">
+        <h3>Loading...</h3>
+      </div>
+      <!-- End Loader -->
+
+      <!-- Begin Error Message -->
+      <div class="card-header" *ngIf="errorMessage">
+        <h3>There has been an Error please refresh the page</h3>
+      </div>
+      <!-- End Error Message -->
+
+      <!-- begin shipments loop -->
+      <div class="card mt-4" *ngFor="let shipment of shipments">
+        <div class="card-header">
+          <b>Name:</b> {{shipment.name}}
+        </div>
+        <div class="card-footer">
+          <b>Organizations: </b>
+          <span class="badge badge-dark" *ngFor="let organization of shipment.entities">{{organization.name}}</span>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6 col-md-3 text-center">
+              <span
+                class="flag-icon flag-icon-{{shipment.shipments[0].sea_shipments[0].sea_movements[0].loading_country_iso | lowercase}} flag-icon-squared w-100"></span>
+              <h6 class="mt-3">{{shipment.shipments[0].sea_shipments[0].sea_movements[0].loading_location_name}}</h6>
+            </div>
+
+            <div class="col-6 col-md-3 text-center">
+              <fa name="arrow-right fa-lg" class="w-100 pr-2"></fa>
+              <fa name="arrow-right fa-lg" class="w-100"></fa>
+              <fa name="arrow-right fa-lg" class="w-100 pl-2"></fa>
+              <!-- begin transportUnit loop -->
+              <span class="badge mt-4">
+                <div class="row" *ngFor="let transportUnit of shipment.transport_units">
+                  <div class="col-3 text-right">
+                    <img src="assets/images/{{transportUnit.type}}.png" alt="" class="img-fluid w-75">
+                  </div>
+                  <div class="col-9 p-0 text-left">
+                    <span class="mt-1">{{transportUnit.reference}}</span>
+                  </div>
+                </div>
+              </span>
+              <!-- end transportUnit loop -->
+            </div>
+
+            <div class="col-6 col-md-3 text-center">
+              <span
+                class="flag-icon flag-icon-{{shipment.shipments[0].sea_shipments[0].sea_movements[1].discharge_country_iso | lowercase}} flag-icon-circle w-100"></span>
+              <h6 class="mt-3">{{shipment.shipments[0].sea_shipments[0].sea_movements[1].discharge_location_name}}</h6>
+            </div>
+            <div class="col-6 col-md-3 text-center">
+              <a class="btn btn-dark btn-block mt-3" [routerLink]="['/shipment', shipment.id]">Track Shipment</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end shipments loop -->
+    </div>
+    <!-- end shipments -->
+  </div>
+  <!-- end Tradeflow overview -->
+
+</div>
