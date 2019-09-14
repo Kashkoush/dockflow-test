@@ -1,1 +1,54 @@
-<p>shipment works!</p>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12 col-md-9">
+      <div class="card">
+        <h5 class="card-header">
+          <fa name="ship fa-lg" class="pr-2"></fa>{{shipmentName}}
+        </h5>
+        <div class="card-body" style="    background-color: rgba(0,0,0,.07);">
+          <!-- Begin Loader -->
+          <div class="card-header" *ngIf="loading">
+            <h3>Loading...</h3>
+          </div>
+          <div class="card-header" *ngIf="errorMessage">
+            <h5>Something went wrong, please make sure you're connected to the internet and Refresh the page</h5>
+          </div>
+          <!-- End Loader -->
+
+          <div *ngIf="timeline.length" class="container-fluid">
+            <horizontal-timeline [timelineElements]="timeline" [showContent]="true" [timelineWrapperWidth]="2000">
+            </horizontal-timeline>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Documents Start -->
+    <div class="col-12 col-md-3">
+      <div class="card">
+        <div class="card-header">
+          Documents
+        </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p>No documents.</p>
+          </blockquote>
+        </div>
+      </div>
+      <!-- Documents End -->
+
+      <!-- Begin Transport Units -->
+      <div class="card mt-3">
+        <div class="card-header">
+          Transport Units
+        </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p>No Transport Units.</p>
+          </blockquote>
+        </div>
+      </div>
+      <!-- end Transport Units -->
+
+    </div>
+  </div>
+</div>

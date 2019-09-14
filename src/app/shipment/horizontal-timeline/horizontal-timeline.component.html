@@ -1,0 +1,75 @@
+<section class="cd-horizontal-timeline" [ngClass]="{'loaded': loaded}">
+  <div class="timeline">
+    <div class="events-wrapper">
+      <div class="events" #eventsWrapper [style.width.px]="eventsWrapperWidth">
+        <ol>
+          <li *ngFor="let item of timelineElements; let index = index">
+            <a #timelineEvents href="#" [ngClass]="{'selected': item.selected, 'older-event': index < selectedIndex}"
+              (click)="onEventClick($event, item)" class="font-weight-bold">{{item.date | date:dateFormat}}</a>
+            <span class="font-weight-bold">{{item.arrivalTime | date:dateFormat}}</span>
+          </li>
+        </ol>
+        <span class="filling-line" aria-hidden="true" #fillingLine></span>
+      </div>
+    </div>
+
+    <ul class="cd-timeline-navigation">
+      <li>
+        <a (click)="onScrollClick($event, false)" class="prev" [ngClass]="{'inactive':prevLinkInactive}">Prev</a>
+      </li>
+      <li *ngIf="timelineElements.length > 3">
+        <a (click)="onScrollClick($event, true)" class="next" [ngClass]="{'inactive':nextLinkInactive}">Next</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="events-content" *ngIf="showContent">
+    <ol>
+      <li *ngFor="let item of timelineElements; let index = index"
+        [@contentState]="item.selected ? 'active' : (index < selectedIndex ? 'left' : 'right')">
+        <!-- Begin The First Row with from and to -->
+        <div class="row">
+          <div class="col-5 text-center">
+            <h3 class="flag-icon flag-icon-{{item.pickupLocationFlag | lowercase}} flag-icon-squared"></h3>
+            <h6>{{item.pickupLocation}}</h6>
+            <h6 class="font-weight-light">{{item.date | date:'fullDate'}}</h6>
+            <h6 class="font-weight-light">{{item.date | date:'longTime'}}</h6>
+            <h6 class="badge badge-dark" *ngIf="index == 0">The Start</h6>
+          </div>
+          <div class="col-2 text-center">
+            <fa name="angle-double-right fa-3x" class="w-100"></fa>
+          </div>
+          <div class="col-5 text-center">
+            <h3 class="flag-icon flag-icon-{{item.dropOffLocation | lowercase}} flag-icon-squared"></h3>
+            <h6>{{item.dropOffLocation}}</h6>
+            <h6 class="font-weight-light">{{item.arrivalTime | date:'fullDate'}}</h6>
+            <h6 class="font-weight-light">{{item.arrivalTime | date:'longTime'}}</h6>
+            <h6 class="badge badge-dark" *ngIf="!timelineElements[index +1]">Final Destination</h6>
+          </div>
+        </div>
+        <!-- Begin The First Row with from and to -->
+        <!-- Begin Second Row -->
+        <div class="row mt-4">
+          <fa name="ship fa-sm" class="pr-2"></fa>
+          <h6>Carrier: <h6 class="font-weight-normal d-inline">{{item.carrier}}</h6>
+          </h6>
+        </div>
+        <!-- End Second Row -->
+        <!-- Beging Third Row -->
+        <div class="row">
+          <fa name="file fa-sm" class="pr-2"></fa>
+          <h6>B/L: <h6 class="font-weight-normal d-inline">{{item.bill_of_lading_reference}}</h6>
+          </h6>
+        </div>
+        <!-- End Third Row -->
+        <!-- Beging Fourth Row -->
+        <div class="row">
+          <fa name="edit fa-sm" class="pr-2"></fa>
+          <h6>Booking Reference: <h6 class="font-weight-normal d-inline">{{item.bookingReference}}</h6>
+          </h6>
+        </div>
+        <!-- End Fourth Row -->
+      </li>
+    </ol>
+  </div>
+</section>

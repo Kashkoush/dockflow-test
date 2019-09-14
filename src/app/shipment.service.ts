@@ -14,7 +14,7 @@ export class ShipmentService {
   }
 
   // Get a single shipment by passing the id
-  getShimpent(id: number) {
-    return this.http.get('https://run.dockflow.com/api/tradeflows/' + id + '?withChildren=%5B%22shipments%22,%22transport_units%22,%22transport_unit_sub_shipments%22,%22telos%22,%22entities%22%5D', { headers: this.headers })
+  getShimpent(shipmentId: number) {
+    return this.http.get('https://run.dockflow.com/api/shipments/' + shipmentId + '?scopes=%5B%22TimelineData%22%5D', { headers: this.headers })
   }
 }

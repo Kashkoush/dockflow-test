@@ -10,6 +10,8 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { HorizontalTimelineComponent } from './shipment/horizontal-timeline/horizontal-timeline.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -17,7 +19,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     AppComponent,
     ShipmentComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    HorizontalTimelineComponent
   ],
   imports: [
     BrowserModule,
@@ -25,6 +28,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     AlertModule.forRoot(),
     HttpClientModule,
     AngularFontAwesomeModule,
+    BrowserAnimationsModule
   ],
   providers: [ShipmentService],
   bootstrap: [AppComponent]
